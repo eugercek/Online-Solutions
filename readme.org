@@ -1,0 +1,16 @@
+#+TITLE: Readme
+#+AUTHOR:    Umut Gercek
+#+EMAIL:     umutgercek1999@gmail.com
+
+* Structure
+#+BEGIN_SRC bash :results raw
+tree -L 3 -I '*\.org'  --noreport
+#+END_SRC
+
+#+RESULTS:
+.
+└── Hackerrank
+    ├── Algorithms
+    │   └── Warmup
+    └── Data Structures
+        └── Arrays
