@@ -59,16 +59,10 @@ void free_singly_linked_list(SinglyLinkedListNode *node) {
 
 // Complete the reversePrint function below.
 void reversePrint(SinglyLinkedListNode *head) {
-  // TODO
-  if (head->next->next == NULL)
+  if (head == NULL)
     return;
-  SinglyLinkedListNode *cur = head, *prev = NULL, *next = NULL;
-  while (cur != NULL) {
-    next = cur->next;
-    cur->next = prev;
-    prev = cur;
-    cur = next;
-  }
+  reversePrint(head->next);
+  cout << head->data << '\n';
 }
 
 int main() {
