@@ -3,17 +3,14 @@
 #+EMAIL:     umutgercek1999@gmail.com
 
 * Structure
-#+BEGIN_SRC bash ::exports results :results raw 
+#+BEGIN_SRC bash :exports both :results raw 
 tree -L 3 -I '*\.org|LICENSE'  --noreport
 #+END_SRC
 
-#+RESULTS:
-.
-└── Hackerrank
-    ├── Algorithms
-    │   └── Warmup
-    └── Data Structures
-        └── Arrays
-* TODOS
+* Where are the comments
+I only deleted reference part and I tried to don't delete the part.
 
+// Complete the foo function below.
 
+If I wrote some explanation or link etc It will be below to the above comment.
+Generally I didn't touch other parts beside the function of the question.
