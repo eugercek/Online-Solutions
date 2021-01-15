@@ -59,12 +59,13 @@ void free_singly_linked_list(SinglyLinkedListNode *node) {
 }
 
 // Complete the reverse function below.
-
 SinglyLinkedListNode *reverseRecursive(SinglyLinkedListNode *head) {
   if (head == NULL || head->next == NULL)
     return head;
-  SinglyLinkedListNode *new_head = reverseRecursive(head->next); // Next element
-  head->next->next = head; // 1->next->next is 2->Here
+  SinglyLinkedListNode *new_head = reverseRecursive(head->next);
+  // 0->1->2 Let 1 be reverse
+  // Creating 2->1
+  head->next->next = head; // 1->next->next is 2 2->1
   head->next = NULL;       // 1->next points next element now it's gone.
   return new_head;
 }
