@@ -59,26 +59,33 @@ void free_singly_linked_list(SinglyLinkedListNode *node) {
 }
 
 // Complete the reverse function below.
-SinglyLinkedListNode *reverseRecursive(SinglyLinkedListNode *head) {
-  if (head == NULL || head->next == NULL)
-    return head;
-  SinglyLinkedListNode *new_head = reverseRecursive(head->next);
-  // 0->1->2 Let 1 be reverse
-  // Creating 2->1
-  head->next->next = head; // 1->next->next is 2 2->1
-  head->next = NULL;       // 1->next points next element now it's gone.
-  return new_head;
-}
-
 SinglyLinkedListNode *reverse(SinglyLinkedListNode *head) {
   SinglyLinkedListNode *cur = head, *prev = NULL, *next;
   while (cur != NULL) {
-    next = cur->next; // For not losing next element
-    cur->next = prev;
+    // For not losing next element, we are stroing next element via next but we
+    // will assign next to prev
+    next = cur->next;
+
+    cur->next = prev; // Broke 1->2 3 and had 2->1
     prev = cur;
     cur = next; // Next element in normal linked list.
   }
   return prev;
+}
+
+// https://www.youtube.com/watch?v=O0By4Zq0OFc&t=538s
+// Assume that list is  0 1 2
+SinglyLinkedListNode *reverseRecursive(SinglyLinkedListNode *head) {
+  if (head == NULL || head->next == NULL)
+    return head;
+  SinglyLinkedListNode *new_head =
+      reverseRecursive(head->next); // 2 can't pass here
+
+  // 0->1->2 Let 1 be reverse
+  // Creating 2->1
+  head->next->next = head; // 1->next->next is 2 2->1 Reversing pointer
+  head->next = NULL;       // 1->next points next element now it's gone.
+  return new_head;
 }
 
 int main() {

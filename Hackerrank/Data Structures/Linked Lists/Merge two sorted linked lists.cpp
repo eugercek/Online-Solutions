@@ -70,10 +70,11 @@ SinglyLinkedListNode *mergeListsHeap(SinglyLinkedListNode *head1,
 
   SinglyLinkedListNode *tmp = dummy;
   while (head1 != NULL || head2 != NULL) {
+    // head2 > head1
     if (head2 == NULL || (head1 != NULL && head1->data < head2->data)) {
       tmp->next = new SinglyLinkedListNode(head1->data);
       head1 = head1->next;
-    } else {
+    } else { // head1 > head2
       tmp->next = new SinglyLinkedListNode(head2->data);
       head2 = head2->next;
     }
