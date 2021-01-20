@@ -1,35 +1,28 @@
 #include <bits/stdc++.h>
+#include <unordered_map>
 
 using namespace std;
 
 vector<string> split_string(string);
 
-// Complete the divisibleSumPairs function below.
-int divisibleSumPairs(int n, int k, vector<int> ar) {
-  // No need for hash map size is fixed and indexes are known.
-  int count = 0;
-  vector<int> mod_count(k, 0);
+// Complete the sockMerchant function below.
+int sockMerchant(int n, vector<int> ar) {
+  int pair = 0;
+  unordered_map<int, int> color_table;
   for (const auto &i : ar) {
-    int complement = i % k == 0 ? 0 : k - (i % k);
-    count += mod_count[complement];
-
-    int mod_value = i % k;
-    mod_count[mod_value]++;
+    color_table[i]++;
+    if (color_table[i] % 2 == 0)
+      pair++;
   }
-  return count;
+  return pair;
 }
 
 int main() {
   ofstream fout(getenv("OUTPUT_PATH"));
 
-  string nk_temp;
-  getline(cin, nk_temp);
-
-  vector<string> nk = split_string(nk_temp);
-
-  int n = stoi(nk[0]);
-
-  int k = stoi(nk[1]);
+  int n;
+  cin >> n;
+  cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
   string ar_temp_temp;
   getline(cin, ar_temp_temp);
@@ -44,7 +37,7 @@ int main() {
     ar[i] = ar_item;
   }
 
-  int result = divisibleSumPairs(n, k, ar);
+  int result = sockMerchant(n, ar);
 
   fout << result << "\n";
 
