@@ -7,10 +7,55 @@
 tree -L 3 -I '*\.org|LICENSE'  --noreport
 #+END_SRC
 
-* Where are the comments
+* Hackerrank
+** Where are the comments
 I only deleted reference part and I tried to don't delete the part.
 
 // Complete the foo function below.
 
 If I wrote some explanation or link etc It will be below to the above comment.
 Generally I didn't touch other parts beside the function of the question.
+* exercism.io
+** Common Lisp
+*** Setup
+**** Download
+***** CL implementation
+There are [[https://common-lisp.net/implementations][various]] CL implementations.
+Choose one of them.
+
+#+begin_src shell
+sudo dnf install sbcl
+#+end_src
+***** quicklisp
+#+begin_quote
+Quicklisp is a library manager for Common Lisp. It works with your existing Common Lisp implementation to download, install, and load any of over 1,500 libraries with a few simple commands.
+#+end_quote
+
+Download quicklisp installer
+
+#+begin_src shell
+cd /tmp
+curl -O https://beta.quicklisp.org/quicklisp.lisp
+#+end_src
+
+Enter CL REPL
+
+#+begin_src shell
+sbcl --load /tmp/quicklisp.lisp
+#+end_src
+
+Install script
+
+#+begin_src lisp
+(quicklisp-quickstart:install)
+#+end_src
+
+SBCL has config file :D Add quicklisp's setup file to sbcl's config file which is in ~/.sbclrc
+
+#+begin_src lisp
+#-quicklisp
+(let ((quicklisp-init (merge-pathnames "quicklisp/setup.lisp"
+                                       (user-homedir-pathname))))
+  (when (probe-file quicklisp-init)
+    (load quicklisp-init)))
+#+end_src
