@@ -25,20 +25,27 @@
 ;;     `(ecase ,nuc
 ;;        ,@pairs)))
 
-(defmacro comp (nuc &body body)
-  (let ((pairs
-          (loop for (a b) in body
-                collect `(,a ,b))))
-    `(case ,nuc
-       ,@pairs
-       (t 'error))))
+;; (defmacro comp (nuc &body body)
+;;   `(ecase ,nuc
+;;      ,@body))
+
+(defun list-to-pairs (l)
+  (if (null l)
+      nil
+      (cons (list (first l)
+                  (second l))
+            (list-to-pairs (cddr l)))))
+
+(defmacro comp (nuc &rest pairs)
+  `(ecase ,nuc
+    ,@(list-to-pairs pairs)))
 
 (defun nuc-comp (nuc)
   (comp nuc
-    (#\G #\C)
-    (#\C #\G)
-    (#\T #\A)
-    (#\A #\U)))
+    #\G #\C
+    #\C #\G
+    #\T #\A
+    #\A #\U))
 
 (defun to-rna (str)
   "Transcribe a string representing DNA nucleotides to RNA."
