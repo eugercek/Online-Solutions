@@ -29,24 +29,26 @@
 ;;   `(ecase ,nuc
 ;;      ,@body))
 
-(defun list-to-pairs (l)
-  (if (null l)
-      nil
-      (cons (list (first l)
-                  (second l))
-            (list-to-pairs (cddr l)))))
+(defun list-to-pairs (list)
+  (loop for (a b) on list
+        by #'cddr
+        collect (list a b)))
 
 (defmacro comp (nuc &rest pairs)
   `(ecase ,nuc
-    ,@(list-to-pairs pairs)))
+     ,@(list-to-pairs (mapcar #'symbol-to-char pairs))))
+
+(defun symbol-to-char (symbol) (char (symbol-name symbol) 0))
 
 (defun nuc-comp (nuc)
   (comp nuc
-    #\G #\C
-    #\C #\G
-    #\T #\A
-    #\A #\U))
+        G C
+        C G
+        T A
+        A U))
 
 (defun to-rna (str)
   "Transcribe a string representing DNA nucleotides to RNA."
   (map 'string #'nuc-comp (string str))) ; Extra (string) is for char inputs
+
+
